@@ -99,7 +99,7 @@ function timeToNow($time) {
  */
 function dd($con) {
 	echo "<pre>";
-	var_dump ( $con );
+	print_r ( $con );
 	die ();
 }
 

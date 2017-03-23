@@ -4,41 +4,51 @@ namespace Home\Controller;
 class ListController extends BaseController {
 
 	//列表页
-	public function show() {
+	public function index() {
 
 		if (empty($_GET['id'])) {
-			$this->error("缺少指定参数!");
+			return $this->error("缺少指定参数!");
 		}
+
         $id = $_GET['id'];
-		$Class = M ('Class');
-		$class = $Class->find($id);
+		$classModel = D('Class');
+		$class = $classModel->find($id);
 		if (is_null($class)) {
-			$this->error("栏目不存在!");
+			return $this->error("栏目不存在!");
 		}
 
-		$classIdArr = array();
-		//查找该id对应的栏目是否有子栏目
-		$Class = D ('Class');
-		$classIdArr = $Class->getChildClass($id);
+        if($class['father_id'] == 0)//一级栏目
+        {
+            $allChildClass = $classModel->getChildClassArr($class['class_id']);
+            $condition['class_id'] = ['in', array_column($allChildClass, 'class_id')];
+
+        }else{
+            $allChildClass = $classModel->getChildClassArr($class['father_id']);
+            $condition['class_id'] = $class['class_id'];
+        }
+
+
+
 		//查询条件
-		$condition['class_id'] = array('in',$classIdArr);
 
-		$Content = M ('Content');
-
+        $condition['state'] = 'publish';
+		$contentModel = M ('Content');
 		// 分页处理,获取数据
-		$count = $Content->where ( $condition )->count ();
+		$count = $contentModel->where ( $condition )->count ();
 		$Page = new \Think\Page ( $count, 17 );
 		$show = $Page->show ();
-		$newsList = $Content->where ( $condition )->limit ( $Page->firstRow . ',' . $Page->listRows )->order('addtime desc,is_stick desc')->select ();
-		//p($newsList);
 
-		//面包屑生成
-		$class = $Class->find($id);
-        dd($class);
-		$mbx = '当前位置：<a href="'.U('Home/Index/index').'">首页</a> >> <a href="'. U('Home/'.$classType.'/show' ,['id'=>$classId]) .'">'.$className.'</a>';
+		$list = $contentModel->where ( $condition )->limit ( $Page->firstRow . ',' . $Page->listRows )->order('is_stick desc, addtime desc')->select ();
+
+		$templates = $classModel->getTemplates();
+
+        $class['index_template'] = $templates[$class['index_template']];
+        $class['content_template'] = $templates[$class['content_template']];
+
 		$this->assign('class', $class);
-		$this->assign ( 'page', $show);
-		$this->assign('newsList',$newsList);
+        $this->assign('allClass', $allChildClass);
+		$this->assign ('page', $show);
+		$this->assign('list', $list);
 		$this->display ();
 	}
 
