@@ -21,12 +21,16 @@ ul, li{list-style: none;margin: 0;padding: 0;}
 	width: 100px;
 	height: 100px;
 }
-.header .head .logo h2{
+.header .head .logo h2,.header .head .logo h3{
 	font-family: 'Microsoft YaHei';
 	color: #fff;
 	font-size: 32px;
 	float: left;
-	margin-top: 26px;
+}
+.header .head .logo h3{
+	font-size: 46px;
+	margin-top: 40px;
+	margin-left: -50px;
 }
 .header .head .left{
   float: left;
