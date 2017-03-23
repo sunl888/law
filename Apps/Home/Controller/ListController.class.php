@@ -10,7 +10,7 @@ class ListController extends BaseController {
 			return $this->error("缺少指定参数!");
 		}
 
-        $id = $_GET['id'];
+        $id = intval($_GET['id']);
 		$classModel = D('Class');
 		$class = $classModel->find($id);
 		if (is_null($class) || $class['type']!='List') {
@@ -36,7 +36,7 @@ class ListController extends BaseController {
 		$Page = new \Think\Page ( $count, 17 );
 		$show = $Page->show ();
 
-		$list = $contentModel->where ( $condition )->limit ( $Page->firstRow . ',' . $Page->listRows )->order('is_stick desc, addtime desc')->select ();
+		$list = $contentModel->where ( $condition )->limit ( $Page->firstRow . ',' . $Page->listRows )->order('is_stick desc, sort_index asc,addtime desc')->select ();
 
 
         $classModel->templateId2Info($class);
@@ -56,7 +56,7 @@ class ListController extends BaseController {
             return $this->error("缺少指定参数!");
         }
 
-        $id = $_GET['id'];
+        $id = intval($_GET['id']);
         $classModel = D('Class');
         $class = $classModel->find($id);
         if (is_null($class) || $class['type']!='Index') {

@@ -56,6 +56,18 @@ class ContentModel extends Model {
 		return $imgNews;
 	}
 
+    /**
+     * 搜索
+     * @param $keyword
+     * @return mixed
+     */
+    public function search($keyword)
+    {
+        $condition['state'] = ['eq','publish'];
+        $condition['title'] = array('like',"%$keyword%");
+        return $this->where($condition)->select();
+    }
+
 	//获取热门文章
 	public function getHotNews() {
 		return $this->order('views desc,is_stick desc,addtime desc')->limit(8)->select();

@@ -7,6 +7,7 @@
     <script src="__PUBLIC__/law_home/lib/jquery.min.js" ></script>
     <!--[if IE 8]>
     <script src="__PUBLIC__/law_home/lib/respond.js"></script>
+    <title>{$title}-淮南师范学院</title>
     <![endif]-->
     <script>
         $(function () {
@@ -35,7 +36,6 @@
             });
         });
     </script>
-    <title>法学院-淮南师范学院</title>
 </head>
 <body>
 <!-- header -->
@@ -67,9 +67,20 @@
             <!-- nav content -->
             <ul id="nav">
                 <li class="active"><a href="#">网站首页</a></li>
-                <!--<li class="active"><a href="__APP__/Home/Index/index/id/{$navList[0]['class_id']}">{$navList[0]['name']}</a></li>-->
+                    <foreach name="navList" item="vo" >
 
-                <volist name="navList" id="nav" offset="1" >
+                            <li><a href="{:U($vo['index_template']['url'], ['id'=>$vo['class_id']])}">{$vo.class_name}</a>
+                            <?php if(!empty($vo['child'])):?>
+                                <div class="sub_nav_list">
+                                <?php foreach($vo['child'] as $child):?>
+                                    <a href="{:U($child['index_template']['url'], ['id'=>$child['class_id']])}">{$child['class_name']}</a>
+                                <?php endforeach;?>
+                                </div>
+                            <?php endif;?>
+
+                        </li>
+                    </foreach>
+                <!-- <volist name="navList" id="nav" >
                     <li>
                         <a href="__APP__/Home/Index/index/id/{$nav.class_id}">{$nav.class_name}</a>
                         <div class="sub_nav_list">
@@ -77,10 +88,9 @@
                             <a href="#" target="_blank">测试测试</a>
                         </div>
                     </li>
-                </volist>
-                <!--<volist name="navList" id="nav" offset="1" length="7">
-                    <li><a href="__APP__/Home/{$nav.type}/news/id/{$nav.class_id}">{$nav.name}</a></li>
                 </volist>-->
+
+
 
             </ul>
         </div>

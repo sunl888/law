@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Boris\Config;
 use Think\Controller;
+use Think\Page;
 
 /**
  * 网站首页
@@ -21,7 +22,6 @@ class IndexController extends BaseController {
     }
 
     public function index(){
-
 		$Content = D ('Content');
 
 		//通知公告
@@ -51,7 +51,9 @@ class IndexController extends BaseController {
         $this->assign('article', $article);
         $this->assign('imgNews', $imgNews);
 
-        //
+        //设置页面标题
+        $this->setTitle('首页');
+
         /*
 		//获取焦点图
 		$jdtList = $Content->getJdt(3,4);
