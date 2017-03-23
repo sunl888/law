@@ -51,19 +51,10 @@ class BaseController extends Controller {
 	 * 获取页面导航栏
 	 */
 	public function getNav() {
-		$Class = M ('Class');
-		//查询条件
-		//$condition['father_id'] = 0;
-		$condition['is_show'] = 1;
-		$condition['is_nav'] = 1;
+		$Class = D ('Class');
 
-		$navList = $Class->where($condition)
-            ->order('sort_index asc')
-            ->alias('c')
-            ->join("__TEMPLATE__ t ON c.index_template = t.template_id")
-            ->field('c.class_id,c.father_id,c.name as class_name,t.type,c.channel_id,t.url,c.content_template,c.index_template,t.template_id,t.name as template_name')
-            ->select();
-        foreach ($navList as $nav=>$val)
+		$nav = $Class->getNav();
+        /*foreach ($navList as $nav=>$val)
         {
             $nav[$val['class_id']] = $navList[$nav];
             if($val['father_id'] !=0)
@@ -71,8 +62,8 @@ class BaseController extends Controller {
                 $navList[$val['father_id']]['child'][] = $val;
                 unset($val);
             }
-        }
-		$this->assign('navList',$navList);
+        }*/
+		$this->assign('navList',$nav);
 	}
 
     public function get_array($id=0){

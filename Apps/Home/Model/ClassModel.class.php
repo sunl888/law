@@ -24,10 +24,17 @@ class ClassModel extends Model{
 		return $classIdArr;
 	}
 
-    /*public function getTemplate($class_id)
+    public function getNav()
     {
-        return $this->where(['class_id'=>$class_id])->join('INNER JOIN __TEMPLATE__ ON __CLASS__.index_template = __TEMPLATE.template_id')->select();
-    }*/
+        $condition['is_show'] = 1;
+        $condition['is_nav'] = 1;
+        return $this->where($condition)
+            ->order('sort_index asc')
+            ->alias('c')
+            ->join("__TEMPLATE__ t ON c.index_template = t.template_id")
+            ->field('c.class_id,c.father_id,c.name as class_name,t.type,c.channel_id,t.url,c.content_template,c.index_template,t.template_id,t.name as template_name')
+            ->select();
+     }
     /**
      * 获取所有的父级栏目
      * @return array
