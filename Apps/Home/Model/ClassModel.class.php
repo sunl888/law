@@ -24,19 +24,40 @@ class ClassModel extends Model{
 		return $classIdArr;
 	}
 
-    public function getNav()
+    public function getNav($currentClassId)
     {
         $condition['is_show'] = 1;
         $condition['is_nav'] = 1;
         //$condition['father_id'] = 0;
         $nav = $this->where($condition)
-            ->order('sort_index asc')
+            ->order('sort_index asc, class_id desc')
             ->alias('c')
             ->join("__TEMPLATE__ t ON c.index_template = t.template_id")
             ->field('c.class_id,c.father_id,c.name as class_name,t.type,c.channel_id,t.url,c.content_template,c.index_template,t.template_id,t.name as template_name')
             ->select();
         $nav = array_column($nav, null, 'class_id');
+
+        if(!is_null($currentClassId))
+        {
+            foreach ($nav as &$val)
+            {
+
+                if($val['class_id'] == $currentClassId){
+                    if($val['father_id']==0)
+                    {
+                        $val['active'] = true;
+                    }else{
+                        $nav[$val['father_id']]['active'] = true;
+                    }
+                }else if(!isset($val['active'])){
+                    $val['active'] = false;
+                }
+
+            }
+        }
+        unset($val);
         foreach ($nav as $item=>&$val){
+
             $this->templateId2Info($val);
             if($val['father_id'] != 0){
                 $nav[ $val['father_id'] ]['child'][] = $val;
@@ -56,7 +77,7 @@ class ClassModel extends Model{
 	public function getParents(){
         if(count(self::$parents)<=0){
             //todo ['is_nav'=>1]
-            self::$parents = $this->where([['father_id'=>0],['is_show'=>1]])->order('sort_index asc')->select();
+            self::$parents = $this->where([['father_id'=>0],['is_show'=>1]])->order('sort_index asc, class_id desc')->select();
         }
         return self::$parents;
     }
@@ -64,8 +85,7 @@ class ClassModel extends Model{
 	public function getChildClassArr($classId) {
 		$condition['father_id'] = $classId;
 		$condition['is_show'] = 1;
-		$classArr = $this->where($condition)->order('sort_index asc')->select();
-		$templates = $this->getTemplates();
+		$classArr = $this->where($condition)->order('sort_index asc, class_id desc')->select();
 		foreach ($classArr as &$v){
             $this->templateId2Info($v);
         }
