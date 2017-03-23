@@ -66,9 +66,9 @@
         <div class="container">
             <!-- nav content -->
             <ul id="nav">
-                <li <?php if(is_null($currentClassId)){echo 'class="active"';}?>><a href="{:U('Home/Index/index')}">网站首页</a></li>
+                <li <?php if(is_null($currentClassId)){echo 'class="active"';}?>><a class="nav_one_a" href="{:U('Home/Index/index')}">网站首页</a></li>
                     <foreach name="navList" item="vo" >
-                            <li <?php if(!is_null($currentClassId) && $vo['active']) echo 'class="active"';?>><a href="{:U($vo['index_template']['url'], ['id'=>$vo['class_id']])}">{$vo.class_name}</a>
+                            <li <?php if(!is_null($currentClassId) && $vo['active']) echo 'class="active"';?>><a class="nav_one_a" href="{:U($vo['index_template']['url'], ['id'=>$vo['class_id']])}">{$vo.class_name}</a>
                             <?php if(!empty($vo['child'])):?>
                                 <div class="sub_nav_list">
                                 <?php foreach($vo['child'] as $child):?>
