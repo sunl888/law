@@ -28,13 +28,21 @@ class ClassModel extends Model{
     {
         $condition['is_show'] = 1;
         $condition['is_nav'] = 1;
-        $condition['father_id'] = 0;
-        return $this->where($condition)
+        //$condition['father_id'] = 0;
+        $nav = $this->where($condition)
             ->order('sort_index asc')
             ->alias('c')
             ->join("__TEMPLATE__ t ON c.index_template = t.template_id")
             ->field('c.class_id,c.father_id,c.name as class_name,t.type,c.channel_id,t.url,c.content_template,c.index_template,t.template_id,t.name as template_name')
             ->select();
+        foreach ($nav as $item=>$val){
+            if($val['father_id'] != 0){
+                $nav[ $val['father_id'] ]['child'][] = $val;
+            }
+        }
+
+
+        return $nav;
      }
 
     /**
@@ -69,7 +77,6 @@ class ClassModel extends Model{
         if(is_null($templates)){
             $templates = M('template')->select();
             $templates = array_column($templates, null, 'template_id');
-
         }
         return $templates;
     }

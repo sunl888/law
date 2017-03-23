@@ -53,7 +53,7 @@ class BaseController extends Controller {
 	public function getNav() {
 		$Class = D ('Class');
 		$nav = $Class->getNav();
-		$this->assign('navList',$nav);
+		$this->assign('navList', $nav);
 	}
 
     /**
