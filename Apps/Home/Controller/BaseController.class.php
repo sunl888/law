@@ -5,14 +5,14 @@ use Think\Controller;
 
 class BaseController extends Controller {
     protected $webTitle = '';
+    protected $currentClassId = null;
 	/**
 	 *  构造方法
 	 */
 	public function __construct() {
 		parent::__construct();
 		$this->loginCount();
-		//获取导航参数
-		$this->getNav();
+
 		//获取网站信息
 		$this->getWebInfo();
 		//获取页脚参数
@@ -52,7 +52,9 @@ class BaseController extends Controller {
 	 */
 	public function getNav() {
 		$Class = D ('Class');
-		$nav = $Class->getNav();
+
+		$nav = $Class->getNav($this->currentClassId);
+        $this->assign('currentClassId', $this->currentClassId);
 		$this->assign('navList', $nav);
 	}
 
@@ -183,7 +185,8 @@ class BaseController extends Controller {
 
 
     protected function display($templateFile='',$charset='',$contentType='',$content='',$prefix='') {
-        $this->view->assign('title',$this->webTitle);
+        $this->assign('title',$this->webTitle);
+        $this->getNav();
         parent::display($templateFile,$charset,$contentType,$content,$prefix);
     }
 
@@ -191,5 +194,8 @@ class BaseController extends Controller {
     {
         $this->webTitle = $title;
     }
-
+    protected function setCurrentClassId($currentClassId)
+    {
+        $this->currentClassId = $currentClassId;
+    }
 }

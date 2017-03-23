@@ -26,7 +26,8 @@ class ListController extends BaseController {
             $fatherClass = $classModel->where(['class_id'=>$class['father_id']])->find();
             $classModel->templateId2Info($fatherClass);
         }
-
+        $this->setTitle($class['name']);
+        $this->setCurrentClassId($class['class_id']);
 		//查询条件
         $condition['class_id'] = $class['class_id'];
         $condition['state'] = 'publish';
@@ -72,6 +73,8 @@ class ListController extends BaseController {
             $fatherClass = $classModel->where(['class_id'=>$class['father_id']])->find();
             $classModel->templateId2Info($fatherClass);
         }
+        $this->setTitle($class['name']);
+        $this->setCurrentClassId($class['class_id']);
         $this->assign('class', $class);
         $this->assign('fatherClass', $fatherClass);
         $this->assign('allClass', $allChildClass);
