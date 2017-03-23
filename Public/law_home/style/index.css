@@ -51,9 +51,15 @@
 	text-overflow:ellipsis;
 }
 .content_box .content_list li a:hover,
-.content_list_bg li a:hover
-{
+.content_list_bg li a:hover {
   color: #6F0D0C;
+}
+.time_icon{
+  float: left;
+  width: 12px;
+  height: 12px;
+  background-image: url(../icons/time.png);
+  margin: 3px 5px 0 0;
 }
 .content_box .content_list li span{
   position: absolute;
@@ -62,6 +68,7 @@
   color: #666;
 }
 .content_box_bg .title{
+  font-family: 'Microsoft YaHei';
   background-color: #6F0D0C;
   color: #fff;
   padding: 10px;
