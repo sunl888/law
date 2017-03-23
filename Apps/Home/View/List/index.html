@@ -1,0 +1,45 @@
+<include file="./Apps/Home/View/Public/head.html" />
+<link rel="stylesheet" href="__PUBLIC__/law_home/style/content.css">
+<!-- content -->
+<div class="content">
+  <div class="container">
+    <div class="hidden-xs col-lg-3 col-sm-3 col-md-3 left">
+      <h2 class="title">学院资讯</h2>
+      <ul>
+        <foreach name="allClass" item="vo" >
+          <li><a <?php if($class['class_id']==$vo['class_id']) echo 'class="active"';?> href="{:U($class['index_template']['url'], ['id'=>$vo['class_id']])}">{$vo['name']}</a></li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-lg-9 col-sm-9 col-md-9 right">
+      <div class="right_header">
+        <ul class="breadcrumb">
+          <li><a href="{:U('Home/Index/index')}">首页</a>/</li>
+          <li><a href="#"></a>/</li>
+          <li class="active"><span>通知公告</span></li>
+        </ul>
+      </div>
+      <div class="right_main">
+        <ul>
+          <foreach name="list" item="vo" >
+            <li>
+              <a href="javascript:;" title="{$vo['title']}">{$vo['title']}</a>
+              <span>{$vo['addtime']}</span>
+            </li>
+          </foreach>
+        </ul>
+        <!-- 分页 -->
+        <div class="page_body">
+          <ol class="page">
+            <li><a href="javascript:;">上一页</a></li>
+            <li><a class="active" href="javascript:;">1</a></li>
+            <li><a href="javascript:;">2</a></li>
+            <li><a href="javascript:;">3</a></li>
+            <li><a href="javascript:;">下一页</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="./Apps/Home/View/Public/footer.html" />
