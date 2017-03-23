@@ -51,6 +51,7 @@ class IndexController extends BaseController {
         $this->assign('article', $article);
         $this->assign('imgNews', $imgNews);
 
+        //
         /*
 		//获取焦点图
 		$jdtList = $Content->getJdt(3,4);
