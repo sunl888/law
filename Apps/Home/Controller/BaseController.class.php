@@ -4,7 +4,7 @@ use Think\Controller;
 
 
 class BaseController extends Controller {
-
+    protected $webTitle = '';
 	/**
 	 *  构造方法
 	 */
@@ -52,17 +52,7 @@ class BaseController extends Controller {
 	 */
 	public function getNav() {
 		$Class = D ('Class');
-
 		$nav = $Class->getNav();
-        /*foreach ($navList as $nav=>$val)
-        {
-            $nav[$val['class_id']] = $navList[$nav];
-            if($val['father_id'] !=0)
-            {
-                $navList[$val['father_id']]['child'][] = $val;
-                unset($val);
-            }
-        }*/
 		$this->assign('navList',$nav);
 	}
 
@@ -190,5 +180,16 @@ class BaseController extends Controller {
 			}
 		}
 	}
+
+
+    protected function display($templateFile='',$charset='',$contentType='',$content='',$prefix='') {
+        $this->view->assign('title',$this->webTitle);
+        parent::display($templateFile,$charset,$contentType,$content,$prefix);
+    }
+
+    protected function setTitle($title)
+    {
+        $this->webTitle = $title;
+    }
 
 }
