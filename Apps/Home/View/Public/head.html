@@ -66,17 +66,19 @@
             <!-- nav content -->
             <ul id="nav">
                 <li class="active"><a href="#">网站首页</a></li>
-                    <volist name="navList" id="vo" >
-                        <li><a href="{:U($vo['index_template']['url'], ['id'=>$vo['class_id']])}">{$vo['name']}</a></li>
-                           <!-- <div class="sub_nav_list">
-                                <notempty name="vo.child">
-                                    <foreach name="vo" item="val">
-                                        <a href="{:U($vo['index_template']['url'], ['id'=>$val['class_id']])}">{$val['name']}</a>
-                                    </foreach>
-                                </notempty>
-                            </div>-->
+                    <foreach name="navList" item="vo" >
+
+                            <li><a href="{:U($vo['index_template']['url'], ['id'=>$vo['class_id']])}">{$vo.class_name}</a>
+                            <?php if(!empty($vo['child'])):?>
+                                <div class="sub_nav_list">
+                                <?php foreach($vo['child'] as $child):?>
+                                    <a href="{:U($child['index_template']['url'], ['id'=>$child['class_id']])}">{$child['class_name']}</a>
+                                <?php endforeach;?>
+                                </div>
+                            <?php endif;?>
+
                         </li>
-                    </volist>
+                    </foreach>
                 <!-- <volist name="navList" id="nav" >
                     <li>
                         <a href="__APP__/Home/Index/index/id/{$nav.class_id}">{$nav.class_name}</a>

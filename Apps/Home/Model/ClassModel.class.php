@@ -35,12 +35,16 @@ class ClassModel extends Model{
             ->join("__TEMPLATE__ t ON c.index_template = t.template_id")
             ->field('c.class_id,c.father_id,c.name as class_name,t.type,c.channel_id,t.url,c.content_template,c.index_template,t.template_id,t.name as template_name')
             ->select();
-        foreach ($nav as $item=>$val){
+        $nav = array_column($nav, null, 'class_id');
+        foreach ($nav as $item=>&$val){
+            $this->templateId2Info($val);
             if($val['father_id'] != 0){
                 $nav[ $val['father_id'] ]['child'][] = $val;
+                unset($nav[$item]);
             }
-        }
 
+        }
+        unset($val);
 
         return $nav;
      }
@@ -52,7 +56,7 @@ class ClassModel extends Model{
 	public function getParents(){
         if(count(self::$parents)<=0){
             //todo ['is_nav'=>1]
-            self::$parents = $this->where([['father_id'=>0],['is_show'=>1]])->order('sort_index desc')->select();
+            self::$parents = $this->where([['father_id'=>0],['is_show'=>1]])->order('sort_index asc')->select();
         }
         return self::$parents;
     }
@@ -60,7 +64,7 @@ class ClassModel extends Model{
 	public function getChildClassArr($classId) {
 		$condition['father_id'] = $classId;
 		$condition['is_show'] = 1;
-		$classArr = $this->where($condition)->order('sort_index desc')->select();
+		$classArr = $this->where($condition)->order('sort_index asc')->select();
 		$templates = $this->getTemplates();
 		foreach ($classArr as &$v){
             $this->templateId2Info($v);
