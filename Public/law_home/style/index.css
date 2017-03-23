@@ -8,6 +8,7 @@
 .content_list_box .content_box, .content_box_bg{
   background-color: #fff;
   padding-bottom: 15px;
+  height: 360px;
 }
 .content_list_box .content_box .title{
   padding: 10px;
@@ -35,6 +36,7 @@
   overflow: hidden;
 }
 .content_list_bg{
+  position: relative;
   height: 275px;
 }
 .content_box .content_list li{
@@ -74,9 +76,18 @@
   padding: 10px;
   font-size: 18px;
 }
+.content_box_bg .notice_container{
+  position: absolute;
+  top: 55px;
+  left: 15px;
+  right: 15px;
+  bottom: 10px;
+  overflow: hidden;
+}
 .content_box_bg .content_list_bg{
   padding-top: 15px;
-  height: 298px!important;
+  position: relative;
+  overflow: visible;
 }
 .content_list_bg li {
   border-bottom: 1px solid #EAEAEA;

@@ -97,15 +97,16 @@
       <div class="col-md-4 col-lg-4 col-sm-6  hidden-xs content_list_box_bg">
         <div class="content_box_bg">
           <h2 class="title">通知公告</h2>
-          <ul class="content_list_bg">
-            <volist name="noticeList" id="notic" empty="没有数据">
-              <li title="{$notic['title']}">
-                <a href="__APP__/Home/Content/article/id/{$notic.content_id}">{$notic['title']}</a>
-                <p><i class="time_icon"></i><span>{$notic.uptime|date='Y.m.d',###}</span></p>
-              </li>
-            </volist>
-
-          </ul>
+          <div class="notice_container">
+            <ul class="content_list_bg" id="notice">
+              <volist name="noticeList" id="notic" empty="没有数据">
+                <li title="{$notic['title']}">
+                  <a href="__APP__/Home/Content/article/id/{$notic.content_id}">{$notic['title']}</a>
+                  <p><i class="time_icon"></i><span>{$notic.uptime|date='Y.m.d',###}</span></p>
+                </li>
+              </volist>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -206,6 +207,18 @@
 
 
     <script type="text/javascript">
+      // 通知公告滚动
+      $(function () {
+          var $notice = $('#notice');
+          setInterval(function () {
+              $notice.animate({
+                  top: '-70px'
+              }, 300,function () {
+                  $notice.append($notice.children().first());
+                  $notice.css('top', 0);
+              })
+          }, 3000)
+      })
       // 轮播图
       $(function() {
         // 目标索引
