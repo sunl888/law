@@ -6,7 +6,36 @@
     <link rel="stylesheet" href="__PUBLIC__/law_home/style/comm.css">
     <link rel="stylesheet" href="__PUBLIC__/law_home/style/tui.css">
     <script src="__PUBLIC__/law_home/lib/jquery.min.js" ></script>
+    <!--[if IE 8]>
     <script src="__PUBLIC__/law_home/lib/respond.js"></script>
+    <![endif]-->
+    <script>
+        $(function () {
+            $('#nav>li').hover(function () {
+                var $list = $(this).find('.sub_nav_list')
+                $list.css('display', 'block');
+                $(this).find('.sub_nav_list').animate({
+                    'opacity': 1,
+                    'top': '60px'
+                }, 200)
+            }, function () {
+                var $list = $(this).find('.sub_nav_list')
+                $(this).find('.sub_nav_list').animate({
+                    'opacity': 0,
+                    'top': '70px'
+                }, 200, function () {
+                    $list.css('display', 'none');
+                })
+            })
+            // 搜索
+            var $searchForm = $('#search_form');
+            $('#search_input').keydown(function (event) {
+                if (event.keyCode === 13) {
+                    $searchForm.submit()
+                }
+            });
+        });
+    </script>
     <title>法学院-淮南师范学院</title>
 </head>
 <body>
@@ -23,8 +52,9 @@
             <div class="right">
                 <!-- search -->
                 <div class="search">
-                    <form action="" method="">
-                        <input type="text" name="keyword">
+                    <form id="search_form" action="" method="">
+                        <input id="search_input" placeholder="请输入关键字搜索.." type="text" name="keyword">
+                        <i class="search_icon"></i>
                     </form>
                 </div>
             </div>
@@ -34,11 +64,17 @@
     <div class="nav">
         <div class="container">
             <!-- nav content -->
-            <ul>
+            <ul id="nav">
                 <li class="active"><a href="__APP__/Home/Index/index/id/{$navList[0]['class_id']}">{$navList[0]['name']}</a></li>
 
                 <volist name="navList" id="nav" offset="1" >
-                    <li><a href="__APP__/Home/Index/index/id/{$nav.class_id}">{$nav.name}</a></li>
+                    <li>
+                        <a href="__APP__/Home/Index/index/id/{$nav.class_id}">{$nav.name}</a>
+                        <div class="sub_nav_list">
+                            <a href="#" target="_blank">受助学生风采</a>
+                            <a href="#" target="_blank">测试测试</a>
+                        </div>
+                    </li>
                 </volist>
                 <!--<volist name="navList" id="nav" offset="1" length="7">
                     <li><a href="__APP__/Home/{$nav.type}/news/id/{$nav.class_id}">{$nav.name}</a></li>
