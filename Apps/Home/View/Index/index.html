@@ -3,8 +3,12 @@
     <link rel="stylesheet" href="__PUBLIC__/law_home/style/index.css">
     <!-- 轮播大图 -->
     <div class="carousel_figure" id="carousel_figure">
+      <!--上一图-->
       <span id="carousel_figure_next"><</span>
+      <!--下一图-->
       <span id="carousel_figure_prev">></span>
+      <!--切换圆点-->
+      <div id="slide_switch" class="mod_slide_switch"></div>
       <ul>
         <li class="active">
           <a href="javascript:;">
@@ -81,7 +85,7 @@
                 <volist name="newsList" id="news" offset="0" limit="4" empty="没有数据">
                   <li>
                     <a href="__APP__/Home/Content/article/id/{$news.content_id}">{$news.title}</a>
-                    <p><i></i><span>{$news.uptime|time_tran=###}</span></p>
+                    <p><i class="time_icon"></i><span>{$news.uptime|time_tran=###}</span></p>
                   </li>
                 </volist>
 
@@ -97,7 +101,7 @@
             <volist name="noticeList" id="notic" empty="没有数据">
               <li title="{$notic['title']}">
                 <a href="__APP__/Home/Content/article/id/{$notic.content_id}">{$notic['title']}</a>
-                <p><i></i><span>{$notic.uptime|date='Y.m.d',###}</span></p>
+                <p><i class="time_icon"></i><span>{$notic.uptime|date='Y.m.d',###}</span></p>
               </li>
             </volist>
 
@@ -203,20 +207,33 @@
 
     <script type="text/javascript">
       // 轮播图
-      $(function(){
+      $(function() {
+        // 目标索引
+        var tagetIndex=0;
         var $carouselFigureWapper = $('#carousel_figure>ul');
         var $carouselFigureItem = $carouselFigureWapper.find('li');
         var itemWidth = $carouselFigureItem.width();
         $carouselFigureWapper.css('width', itemWidth * $carouselFigureItem.length)
         var $imgs = $('#carousel_figure img')
         $imgs.css('width', $(window).width())
+        var $slideSwitch = $('#slide_switch');
+        $slideSwitch.append('<a href="javascript:;" class="active slide_switch_item" data-p="0"><i></i></a>');
+        for(var i=1; i<$carouselFigureItem.length;i++){
+            $slideSwitch.append('<a href="javascript:;" class="slide_switch_item" data-p="'+ i +'"><i></i></a>');
+        }
+        $slideSwitch.find('a').click(function () {
+            var $this = $(this);
+            toggle(-($this.index() - tagetIndex));
+        })
         $(window).resize(function() {
-          console.log($(window).width())
-          $imgs.css('width', $(window).width())
-          $('#carousel_figure img').css('width', $(window).width())
+          $imgs.css('width', $(window).width());
+          $('#carousel_figure img').css('width', $(window).width());
           itemWidth = $carouselFigureItem.width();
           $carouselFigureWapper.css('width', itemWidth * $carouselFigureItem.length);
           $carouselFigureWapper.css('left', -$carouselFigureWapper.find('li.active').index() * itemWidth)
+          $carouselFigureWapper.find('li.active>.focus_text').css({
+              left: itemWidth / 2 - $activeFoucsText.width() / 2
+          });
         });
         var $activeFoucsText = $carouselFigureWapper.find('li.active>.focus_text');
         $activeFoucsText.animate({
@@ -238,7 +255,10 @@
           if(index == 0){
             index = $carouselFigureItem.length
           }
-          var tagetIndex = (index - offset) % $carouselFigureItem.length;
+          tagetIndex = (index - offset) % $carouselFigureItem.length;
+
+          $slideSwitch.find('a.active').removeClass('active');
+          $slideSwitch.find('a').eq(tagetIndex).addClass('active');
           $carouselFigureWapper.animate({
             left: -tagetIndex * itemWidth
           }, 500, function(){
