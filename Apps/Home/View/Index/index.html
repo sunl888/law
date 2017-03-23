@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="__PUBLIC__/law_home/style/index.css">
+    <link rel="stylesheet" href="__PUBLIC__/law_home/style/comm.css">
+    <link rel="stylesheet" href="__PUBLIC__/law_home/style/tui.css">
+    <script src="__PUBLIC__/law_home/lib/respond.js"></script>
+    <title>法学院-淮南师范学院</title>
+  </head>
+  <body>
+    <!-- header -->
+    <include file="./Apps/Home/View/Public/head.html" />
+
+    <!-- 轮播大图 -->
+    <div class="carousel_figure" id="carousel_figure">
+      <span id="carousel_figure_next"><</span>
+      <span id="carousel_figure_prev">></span>
+      <ul>
+        <li class="active">
+          <a href="javascript:;">
+            <img src="__PUBLIC__/law_home/img/pic1.jpg">
+          </a>
+          <div class="focus_text">
+            <div class="mask"></div>
+            <h4>法学院2016年下半年学生党员拟发展人员公示</h4>
+            <p>经法学院党政联席会议11月11日研究决定，以下同学为法学院下半年发展对象，现予以公示，公示期11月30－12月6日，公示期间如有问题请向院党总支（6862927）或党政办（6862560）反映。</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;">
+            <img src="__PUBLIC__/law_home/img/pic2.jpg">
+          </a>
+          <div class="focus_text">
+            <div class="mask"></div>
+            <h4>法学院2016年下半年学生党员拟发展人员公示</h4>
+            <p>经法学院党政联席会议11月11日研究决定，以下同学为法学院下半年发展对象，现予以公示，公示期11月30－12月6日，公示期间如有问题请向院党总支（6862927）或党政办（6862560）反映。</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;">
+            <img src="__PUBLIC__/law_home/img/pic3.jpg">
+          </a>
+          <div class="focus_text">
+            <div class="mask"></div>
+            <h4>法学院2016年下半年学生党员拟发展人员公示</h4>
+            <p>经法学院党政联席会议11月11日研究决定，以下同学为法学院下半年发展对象，现予以公示，公示期11月30－12月6日，公示期间如有问题请向院党总支（6862927）或党政办（6862560）反映。</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;">
+            <img src="__PUBLIC__/law_home/img/pic4.jpg">
+          </a>
+          <div class="focus_text">
+            <div class="mask"></div>
+            <h4>法学院2016年下半年学生党员拟发展人员公示</h4>
+            <p>经法学院党政联席会议11月11日研究决定，以下同学为法学院下半年发展对象，现予以公示，公示期11月30－12月6日，公示期间如有问题请向院党总支（6862927）或党政办（6862560）反映。</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;">
+            <img src="__PUBLIC__/law_home/img/pic5.jpg">
+          </a>
+          <div class="focus_text">
+            <div class="mask"></div>
+            <h4>法学院2016年下半年学生党员拟发展人员公示</h4>
+            <p>经法学院党政联席会议11月11日研究决定，以下同学为法学院下半年发展对象，现予以公示，公示期11月30－12月6日，公示期间如有问题请向院党总支（6862927）或党政办（6862560）反映。</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 正文 -->
+    <div class="container text_content">
+      <!-- 政法要闻要闻 -->
+      <div class="container content_news col-md-8 col-lg-8 col-sm-6 col-xs-12">
+        <div class="content_news_box">
+          <h2 class="title">政法要闻</h2>
+          <div class="content_news_main">
+            <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 content_news_left">
+              <img src="__PUBLIC__/upload/{$imgNews[0]['picurl']}" alt="">
+
+              <a href="__APP__/Home/Content/article/id/{$imgNews[0]['content_id']}">
+                <h2>{$imgNews[0]['title']}</h2>
+                <p>{$imgNews[0]['description']}</p>
+              </a>
+
+            </div>
+            <div class="col-md-6 col-lg-6 hidden-sm hidden-xs">
+              <ul class="content_list_bg">
+
+                <volist name="newsList" id="news" offset="0" limit="4" empty="没有数据">
+                  <li>
+                    <a href="__APP__/Home/Content/article/id/{$news.content_id}">{$news.title}</a>
+                    <p><i></i><span>{$news.uptime|time_tran=###}</span></p>
+                  </li>
+                </volist>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-6  hidden-xs content_list_box_bg">
+        <div class="content_box_bg">
+          <h2 class="title">通知公告</h2>
+          <ul class="content_list_bg">
+            <volist name="noticeList" id="notic" empty="没有数据">
+              <li title="{$notic['title']}">
+                <a href="__APP__/Home/Content/article/id/{$notic.content_id}">{$notic['title']}</a>
+                <p><i></i><span>{$notic.uptime|date='Y.m.d',###}</span></p>
+              </li>
+            </volist>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container text_content">
+      <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 content_list_box">
+      <div class="content_box">
+        <div class="title">
+          <h2>教学管理</h2>
+          <a href="__APP__/Home/List/news/id/{$teaching[0]['class_id']}">更多</a>
+        </div>
+        <ul class="content_list">
+
+          <volist name="teaching" id="teach" offset="0" empty="没有数据">
+            <li>
+              <a href="__APP__/Home/Content/article/id/{$teach.content_id}" title="{$teach.title}">{$teach.title}</a>
+              <span>{$teach.uptime|time_tran=###}</span>
+            </li>
+          </volist>
+
+        </ul>
+      </div>
+    </div>
+      <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 content_list_box">
+        <div class="content_box">
+          <div class="title">
+            <h2>教学管理</h2>
+            <a href="__APP__/Home/List/news/id/{$teaching[0]['class_id']}">更多</a>
+          </div>
+          <ul class="content_list">
+
+            <volist name="teaching" id="teach" offset="0" empty="没有数据">
+              <li>
+                <a href="__APP__/Home/Content/article/id/{$teach.content_id}" title="{$teach.title}">{$teach.title}</a>
+                <span>{$teach.uptime|time_tran=###}</span>
+              </li>
+            </volist>
+
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4 hidden-sm col-xs-12 content_list_box">
+        <div class="content_box">
+          <div class="title">
+            <h2>教学管理</h2>
+            <a href="__APP__/Home/List/news/id/{$teaching[0]['class_id']}">更多</a>
+          </div>
+          <ul class="content_list">
+
+            <volist name="teaching" id="teach" offset="0" empty="没有数据">
+              <li>
+                <a href="__APP__/Home/Content/article/id/{$teach.content_id}" title="{$teach.title}">{$teach.title}</a>
+                <span>{$teach.uptime|time_tran=###}</span>
+              </li>
+            </volist>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 背景 -->
+    <div class="bg_pic">
+      <div class="mask"></div>
+      <div class="warp">
+        <h2>{$webInfo.MOTTO}</h2>
+        <p>{$webInfo.WEBNAME}</p>
+      </div>
+    </div>
+
+    <!-- pic -->
+    <div class="some_pic">
+      <div class="container">
+        <ul class="some_pic_box">
+
+          <volist name="hasImgUrl" id="imgUrl" limit="4">
+            <li class="col-md-3 col-lg-3 col-sm-4 col-xs-6">
+              <a href="{$imgUrl.url}">
+                <div class="img_wrapper">
+                  <img src="__PUBLIC__/upload/{$imgUrl.logo}" alt="">
+                  <div class="img_describe_box">
+                    <div class="mask"></div>
+                    <h3>
+                      <span>{$imgUrl.webname}</span>
+                    </h3>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </volist>
+
+        </ul>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <include file="./Apps/Home/View/Public/footer.html" />
+
+    <!--js-->
+    <script src="__PUBLIC__/law_home/lib/jquery.min.js" ></script>
+    <script type="text/javascript">
+      // 轮播图
+      $(function(){
+        var $carouselFigureWapper = $('#carousel_figure>ul');
+        var $carouselFigureItem = $carouselFigureWapper.find('li');
+        var itemWidth = $carouselFigureItem.width();
+        $carouselFigureWapper.css('width', itemWidth * $carouselFigureItem.length)
+        var $imgs = $('#carousel_figure img')
+        $imgs.css('width', $(window).width())
+        $(window).resize(function() {
+          console.log($(window).width())
+          $imgs.css('width', $(window).width())
+          $('#carousel_figure img').css('width', $(window).width())
+          itemWidth = $carouselFigureItem.width();
+          $carouselFigureWapper.css('width', itemWidth * $carouselFigureItem.length);
+          $carouselFigureWapper.css('left', -$carouselFigureWapper.find('li.active').index() * itemWidth)
+        });
+        var $activeFoucsText = $carouselFigureWapper.find('li.active>.focus_text');
+        $activeFoucsText.animate({
+          opacity: 1,
+          left: itemWidth / 2 - $activeFoucsText.width() / 2
+        }, 300)
+        function toggle(offset){
+          if(window.toggleing){
+            return;
+          }
+          window.toggleing = true
+          var $active = $carouselFigureWapper.find('li.active');
+          $active.find('.focus_text').animate({
+              opacity: 0,
+              left: 0
+            }, 300)
+          var index = $active.index();
+
+          if(index == 0){
+            index = $carouselFigureItem.length
+          }
+          var tagetIndex = (index - offset) % $carouselFigureItem.length;
+          $carouselFigureWapper.animate({
+            left: -tagetIndex * itemWidth
+          }, 500, function(){
+            $active.removeClass('active');
+            var $current = $($carouselFigureItem.get(tagetIndex))
+            $current.addClass('active')
+            $activeFoucsText = $current.find('.focus_text');
+            $activeFoucsText.animate({
+              opacity: 1,
+              left: itemWidth / 2 - $activeFoucsText.width() / 2
+            }, 300, function(){
+              window.toggleing = false
+            })
+          });
+        }
+        $('#carousel_figure_next').click(function(){
+          toggle(1);
+        })
+
+        $('#carousel_figure_prev').click(function(){
+          toggle(-1);
+        })
+      })
+
+    </script>
+  </body>
+</html>
