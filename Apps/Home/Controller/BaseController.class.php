@@ -17,16 +17,10 @@ class BaseController extends Controller {
 		$this->getWebInfo();
 		//获取页脚参数
 		$this->getFooter();
-		//获取页面广告
-		$this->getAd();
-		//获取热门文章和最新文章
-		$this->getNews();
-		//获取时间
-		$this->assign('time',time());
 	}
 
     /**
-     * 获取class_id
+     * 通过分类名字获取class_id
      * @return bool
      */
 	public function getClassIdByName($name= ''){
@@ -53,35 +47,47 @@ class BaseController extends Controller {
 		$this->assign('webInfo',$webInfo);
 	}
 
-
 	/**
 	 * 获取页面导航栏
 	 */
 	public function getNav() {
 		$Class = M ('Class');
 		//查询条件
-		$condition['father_id'] = 0;
+		//$condition['father_id'] = 0;
 		$condition['is_show'] = 1;
 		$condition['is_nav'] = 1;
 
-		$navList = $Class->where($condition)->order('sort_index asc')->select();
+		$navList = $Class->where($condition)
+            ->order('sort_index asc')
+            ->alias('c')
+            ->join("__TEMPLATE__ t ON c.index_template = t.template_id")
+            ->field('c.class_id,c.father_id,c.name as class_name,t.type,c.channel_id,t.url,c.content_template,c.index_template,t.template_id,t.name as template_name')
+            ->select();
+        foreach ($navList as $nav=>$val)
+        {
+            $nav[$val['class_id']] = $navList[$nav];
+            if($val['father_id'] !=0)
+            {
+                $navList[$val['father_id']]['child'][] = $val;
+                unset($val);
+            }
+        }
 		$this->assign('navList',$navList);
-
 	}
 
+    public function get_array($id=0){
+        $sql = "select id,title from class where pid= $id";
+        $result = mysql_query($sql);//查询子类
+        $arr = array();
+        if($result && mysql_affected_rows()){//如果有子类
+            while($rows=mysql_fetch_assoc($result)){ //循环记录集
+                $rows['list'] = get_array($rows['id']); //调用函数，传入参数，继续查询下级
+                $arr[] = $rows; //组合数组
+            }
+            return $arr;
+        }
+    }
     /**
-     * 获取最新新闻和热门新闻
-     */
-	public function getNews() {
-		$Content = D ('Content');
-		$hotNewsList = $Content->getHotNews();
-		$newNewsList = $Content->getNewNews();
-		$this->assign('hotNewsList',$hotNewsList);
-		$this->assign('newNewsList',$newNewsList);
-	}
-
-
-	/**
 	 * 获取页面页脚内容
 	 */
 	public function getFooter() {
@@ -107,24 +113,6 @@ class BaseController extends Controller {
 		$this->assign('hasImgUrl',$hasImgUrl);
 		$this->assign('hotUrl',$hotUrl);
 	}
-
-
-	/**
-	 * 获取页面广告
-	 */
-	public function getAd() {
-
-		$adList = array();
-		//页面广告是以图片的形式存储在Flink表中的
-		$Flink = M ('Flink');
-		$adList['topAd'] = $Flink->find(31);
-		$adList['centerAd'] = $Flink->find(32);
-		$adList['bottomAdL'] = $Flink->find(33);
-		$adList['bottomAdR'] = $Flink->find(34);
-
-		$this->assign('adList',$adList);
-	}
-
 
 	/**
 	 *  统计网站流量函数
@@ -178,8 +166,6 @@ class BaseController extends Controller {
 		return;
 	}
 	
-	
-	
 	/**
 	 * 系统文件上传函数
 	 * @param unknown_type $type 文件上传类型
@@ -225,6 +211,5 @@ class BaseController extends Controller {
 			}
 		}
 	}
-	
 
 }

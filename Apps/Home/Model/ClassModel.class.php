@@ -24,6 +24,10 @@ class ClassModel extends Model{
 		return $classIdArr;
 	}
 
+    /*public function getTemplate($class_id)
+    {
+        return $this->where(['class_id'=>$class_id])->join('INNER JOIN __TEMPLATE__ ON __CLASS__.index_template = __TEMPLATE.template_id')->select();
+    }*/
     /**
      * 获取所有的父级栏目
      * @return array

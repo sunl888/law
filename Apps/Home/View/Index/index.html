@@ -128,15 +128,15 @@
       <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 content_list_box">
         <div class="content_box">
           <div class="title">
-            <h2>教学管理</h2>
-            <a href="__APP__/Home/List/news/id/{$teaching[0]['class_id']}">更多</a>
+            <h2>科学研究</h2>
+            <a href="__APP__/Home/List/news/id/{$scientific[0]['class_id']}">更多</a>
           </div>
           <ul class="content_list">
 
-            <volist name="teaching" id="teach" offset="0" empty="没有数据">
+            <volist name="scientific" id="scient" offset="0" empty="没有数据">
               <li>
-                <a href="__APP__/Home/Content/article/id/{$teach.content_id}" title="{$teach.title}">{$teach.title}</a>
-                <span>{$teach.uptime|time_tran=###}</span>
+                <a href="__APP__/Home/Content/article/id/{$scient.content_id}" title="{$scient.title}">{$scient.title}</a>
+                <span>{$scient.uptime|time_tran=###}</span>
               </li>
             </volist>
 
@@ -146,12 +146,12 @@
       <div class="col-md-4 col-lg-4 hidden-sm col-xs-12 content_list_box">
         <div class="content_box">
           <div class="title">
-            <h2>教学管理</h2>
-            <a href="__APP__/Home/List/news/id/{$teaching[0]['class_id']}">更多</a>
+            <h2>党团工作</h2>
+            <a href="__APP__/Home/List/news/id/{$dtgz[0]['class_id']}">更多</a>
           </div>
           <ul class="content_list">
 
-            <volist name="teaching" id="teach" offset="0" empty="没有数据">
+            <volist name="dtgz" id="teach" offset="0" empty="没有数据">
               <li>
                 <a href="__APP__/Home/Content/article/id/{$teach.content_id}" title="{$teach.title}">{$teach.title}</a>
                 <span>{$teach.uptime|time_tran=###}</span>
