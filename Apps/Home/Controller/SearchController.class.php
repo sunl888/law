@@ -14,6 +14,7 @@ class SearchController extends BaseController
     public function search($keyword = '')
     {
         $content = D('Content');
+        //这里待会验证
         $result = $content->search($keyword);
         $this->assign('searchResult',$result);
         $this->display('list');
