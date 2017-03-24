@@ -8,14 +8,28 @@ class ContentModel extends Model {
 	/**
 	 * 根据栏目ID，获取指定数量的新闻列表
 	 *
-	 * @param $id
+	 * @param $class
 	 * @param $amount
 	 * @return $newsList
 	 */
-	public function getContent($id,$amount) {
+	public function getContent($class,$amount, $exceptContentId = null) {
 
-		$condition['class_id'] = $id;
-		$newsList = $this->where($condition)->order('addtime desc,sort_index desc')->limit($amount)->select();
+        $classify = D('Class');
+	    if($class['father_id']==0){
+            $childIds = array_column($classify->getChildClassArr($class['class_id']), 'class_id');
+            array_push($childIds, $class['class_id']);
+            $condition['class_id'] = ['in', $childIds];
+
+        }else{
+            $condition['class_id'] = $class['class_id'];
+        }
+
+		if(!is_null($exceptContentId))
+		{
+            $condition['content_id'] = ['NEQ', intval($exceptContentId)];
+        }
+
+		$newsList = $this->where($condition)->order('sort_index asc, addtime desc')->limit($amount)->select();
 		foreach ($newsList as $k=>$v) {
 			$newsList[$k]['addtime'] = strtotime($v['addtime']);
 		}
@@ -77,7 +91,5 @@ class ContentModel extends Model {
 	public function getNewNews() {
 		return $this->order('addtime desc')->limit(8)->select();
 	}
-
-
 
 }

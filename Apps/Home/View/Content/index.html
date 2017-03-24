@@ -19,7 +19,9 @@
           <div class="content_main">
               <div class="title">
                   <h1 style="padding: 10px 0;<?php if(!empty($content['title_color'])){echo 'color:'.$content['title_color'].';';}?>">{$content['title']}</h1>
-                  <span>作者：{$content['author']}</span>
+                  <?php if(!empty($content['author'])):?>
+                    <span>作者：{$content['author']}</span>
+                  <?php endif;?>
                   <span>{$content['addtime']}</span>
                   <span>点击量：{$content['views']}次</span>
               </div>
