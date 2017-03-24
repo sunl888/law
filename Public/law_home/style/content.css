@@ -1,6 +1,6 @@
 /* big Img */
 .big_img{
-  height: 280px;
+  height: 200px;
   background-image: url(../img/detail_bg.png);
   background-size: cover;
 }
