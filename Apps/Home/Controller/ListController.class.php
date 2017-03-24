@@ -39,7 +39,6 @@ class ListController extends BaseController {
 
 		$list = $contentModel->where ( $condition )->limit ( $Page->firstRow . ',' . $Page->listRows )->order('is_stick desc, sort_index asc,addtime desc')->select ();
 
-
         $classModel->templateId2Info($class);
 		$this->assign('class', $class);
         $this->assign('fatherClass', $fatherClass);

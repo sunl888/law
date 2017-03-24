@@ -3,30 +3,27 @@
 <!-- content -->
 <div class="content">
   <div class="container">
-    <div class="hidden-xs col-lg-3 col-sm-3 col-md-3 left">
-      <h2 class="title"><?php if(is_null($fatherClass)){echo $class['name'];}else{echo $fatherClass['name'];}?></h2>
-      <ul>
-        <foreach name="allClass" item="vo" >
-          <li><a <?php if($class['class_id']==$vo['class_id']) echo 'class="active"';?> href="{:U($vo['index_template']['url'], ['id'=>$vo['class_id']])}">{$vo['name']}</a></li>
-        </foreach>
-      </ul>
-    </div>
-    <div class="col-xs-12 col-lg-9 col-sm-9 col-md-9 right">
-      <div class="right_header">
-        <ul class="breadcrumb">
-          <li><a href="{:U('Home/Index/index')}">首页</a>/</li>
-          <?php if(is_null($fatherClass)):?>
-          <li class="active"><span>{$class['name']}</span></li>
-          <?php else:?>
-          <li><a href="{:U($fatherClass['index_template']['url'], ['id'=>$fatherClass['class_id']])}">{$fatherClass['name']}</a>/</li>
-          <li class="active"><span>{$class['name']}</span></li>
-          <?php endif;?>
-        </ul>
+      <div class="content_box">
+          <div class="right_header">
+              <ul class="breadcrumb">
+                  <li><a href="#">首页</a>/</li>
+                  <li><a href="#">学院资讯</a>/</li>
+                  <li><a href="#">通知公告</a>/</li>
+                  <li class="active">正文</li>
+              </ul>
+          </div>
+          <div class="content_main">
+              <div class="title">
+                  <h2>关于申请助学金的通知</h2>
+                  <span>作者：北京大学考古文博学院</span>
+                  <span>2017.03.29</span>
+                  <span>点击量：1843次</span>
+              </div>
+              <div class="content_article">
+                  ewrwerewrwerewrwerewrwerewrwerewrwer
+              </div>
+          </div>
       </div>
-      <div class="right_main">
-        {$class['content']}
-      </div>
-    </div>
   </div>
 </div>
 <include file="./Apps/Home/View/Public/footer.html" />
