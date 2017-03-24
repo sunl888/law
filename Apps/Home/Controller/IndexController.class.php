@@ -24,9 +24,11 @@ class IndexController extends BaseController {
     public function index(){
 		$Content = D ('Content');
         $classify = D('Class');
+        $classes = $classify->allClasses();
 
 		//通知公告
-        $noticeClass = $this->getClassByName('通知公告');
+        //$noticeClass = $this->getClassByName('通知公告');
+        $noticeClass = $classes[36];
         $classify->templateId2Info($noticeClass);
 		$noticeList = $Content->getContent($noticeClass, $this->prePage);
         $this->assign('noticeClass',$noticeClass);
@@ -34,28 +36,32 @@ class IndexController extends BaseController {
 
 
 		//教学管理
-        $teachingClass = $this->getClassByName('教学管理');
+        //$teachingClass = $this->getClassByName('教学管理');
+        $teachingClass = $classes[3];
         $classify->templateId2Info($teachingClass);
         $teaching = $Content->getContent($teachingClass, $this->prePage);
         $this->assign('teachingClass',$teachingClass);
         $this->assign('teaching', $teaching);
 
         //科学研究
-        $scienceClass = $this->getClassByName('科学研究');
+        //$scienceClass = $this->getClassByName('科学研究');
+        $scienceClass = $classes[4];
         $classify->templateId2Info($scienceClass);
         $scientific = $Content->getContent($scienceClass, $this->prePage);
         $this->assign('scienceClass',$scienceClass);
         $this->assign('scientific',$scientific);
 
         //党团建设
-        $dtjsClass = $this->getClassByName('党团建设');
+        //$dtjsClass = $this->getClassByName('党团建设');
+        $dtjsClass = $classes[5];
         $classify->templateId2Info($dtjsClass);
         $dtjsList = $Content->getContent($dtjsClass, $this->prePage);
         $this->assign('dtjsClass',$dtjsClass);
         $this->assign('dtjsList',$dtjsList);
 
         //政法要闻
-        $newsClass = $this->getClassByName('政法要闻');
+        //$newsClass = $this->getClassByName('政法要闻');
+        $newsClass = $classes[37];
         $classify->templateId2Info($newsClass);
 
         $this->assign('newsClass', $newsClass);
