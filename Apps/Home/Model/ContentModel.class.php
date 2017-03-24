@@ -73,15 +73,19 @@ class ContentModel extends Model {
     /**
      * 搜索
      * @param $keyword
+     * @param $limit default =0 查询所有
      * @return mixed
      */
-    public function search($keyword)
+    public function search($keyword,$offset=0,$limit=0)
     {
         $condition['state'] = ['eq','publish'];
         $condition['title'] = array('like',"%$keyword%");
-        return $this->where($condition)->select();
+        $join1 = "JOIN __CLASS__ ON __CONTENT__.class_id = __CLASS__.class_id";
+        $join2 = "JOIN __TEMPLATE__ ON __CLASS__.index_template = __TEMPLATE__.template_id";
+        //$fields = "c.content_id,c.admin_id,c.class_id,c.title,c.author,c.description,c.keywords,c.addtime,c.state,c.picurl";
+        return $this->join($join1)->join($join2)->limit($offset,$limit)->where($condition)->select();
+        //dd($this->getLastSql());
     }
-
 	//获取热门文章
 	public function getHotNews() {
 		return $this->order('views desc,is_stick desc,addtime desc')->limit(8)->select();

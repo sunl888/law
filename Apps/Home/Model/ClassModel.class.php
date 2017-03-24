@@ -73,7 +73,6 @@ class ClassModel extends Model{
                 $nav[ $val['father_id'] ]['child'][] = $val;
                 unset($nav[$item]);
             }
-
         }
         unset($val);
         return $nav;
