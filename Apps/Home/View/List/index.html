@@ -27,12 +27,17 @@
       </div>
       <div class="right_main">
         <ul>
+
+          <?php if(is_null($list)):?>
+          <li>暂无数据</li>
+          <?php else:?>
           <foreach name="list" item="vo" >
             <li>
-              <a href="javascript:;" title="{$vo['title']}">{$vo['title']}</a>
+              <a href="<?php echo U($class['content_template']['url'], ['id'=>$vo['content_id']]);?>" title="{$vo['title']}">{$vo['title']}</a>
               <span>{$vo['addtime']}</span>
             </li>
           </foreach>
+          <?php endif;?>
         </ul>
         <!-- 分页 -->
         <div class="page_body">

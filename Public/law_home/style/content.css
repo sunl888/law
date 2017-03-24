@@ -137,3 +137,28 @@
   background-color: #6F0D0C;
   font-weight: 600;
 }
+
+/* page */
+.content_box{
+  background-color: #fff;
+  padding: 0 35px 35px 35px;
+}
+.content_box .content_main{
+  padding: 20px 0;
+}
+.content_box .content_main .title{
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #eee;
+}
+.content_box .content_main .title h2{
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.content_box .content_main .title span{
+  color: #666;
+  margin-right: 10px;
+}
+.content_main .content_article{
+  padding: 15px 0;
+}

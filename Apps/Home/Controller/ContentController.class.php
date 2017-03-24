@@ -16,7 +16,6 @@ class ContentController extends BaseController {
         if (is_null($content)) {
             $this->error("您要访问的内容不存在!");
         }
-
-
+        $this->display();
     }
 }
