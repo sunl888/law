@@ -32,7 +32,15 @@ class BaseController extends Controller {
             return false;
         }
     }
-
+    /**
+     * 通过分类名字获取class
+     * @return bool
+     */
+    public function getClassByName($name= ''){
+        $classify = D('Class');
+        $class = deep_in_array($name, $classify->getParents());
+        return $class;
+    }
 	/**
 	 * 获取网站信息
 	 */

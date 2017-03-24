@@ -65,26 +65,24 @@
 
     <!-- 正文 -->
     <div class="container text_content">
-      <!-- 政法要闻要闻 -->
+      <!-- 政法要闻 -->
       <div class="container content_news col-md-8 col-lg-8 col-sm-6 col-xs-12">
         <div class="content_news_box">
-          <h2 class="title">政法要闻</h2>
+          <h2 class="title">{$newsClass['name']}</h2>
           <div class="content_news_main">
             <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 content_news_left">
-              <img src="__PUBLIC__/upload/{$imgNews[0]['picurl']}" alt="">
-
-              <a href="__APP__/Home/Content/article/id/{$imgNews[0]['content_id']}">
-                <h2>{$imgNews[0]['title']}</h2>
-                <p>{$imgNews[0]['description']}</p>
+              <a href="{:U($newsClass['content_template']['url'], ['id'=>$imgNews['content_id']])}">
+              <img src="__PUBLIC__/upload/{$imgNews['picurl']}">
+                <h2>{$imgNews['title']}</h2>
+                <p>{$imgNews['description']}</p>
               </a>
-
             </div>
             <div class="col-md-6 col-lg-6 hidden-sm hidden-xs">
               <ul class="content_list_bg">
 
                 <volist name="newsList" id="news" offset="0" limit="4" empty="没有数据">
                   <li>
-                    <a href="__APP__/Home/Content/article/id/{$news.content_id}">{$news.title}</a>
+                    <a href="{:U($newsClass['content_template']['url'], ['id'=>$news['content_id']])}" title="{$news.title}">{$news.title}</a>
                     <p><i class="time_icon"></i><span>{$news.uptime|time_tran=###}</span></p>
                   </li>
                 </volist>
@@ -94,17 +92,18 @@
           </div>
         </div>
       </div>
+      <!-- 通知公告 -->
       <div class="col-md-4 col-lg-4 col-sm-6  hidden-xs content_list_box_bg">
         <div class="content_box_bg">
           <h2 class="title">
-            通知公告
-            <a href="#">更多</a>
+            {$noticeClass['name']}
+            <a href="{:U($noticeClass['index_template']['url'], ['id'=>$noticeClass['class_id']])}">更多</a>
           </h2>
           <div class="notice_container">
             <ul class="content_list_bg" id="notice">
               <volist name="noticeList" id="notic" empty="没有数据">
-                <li title="{$notic['title']}">
-                  <a href="__APP__/Home/Content/article/id/{$notic.content_id}">{$notic['title']}</a>
+                <li>
+                  <a title="{$notic['title']}" href="{:U($noticeClass['content_template']['url'], ['id'=>$notic['content_id']])}">{$notic['title']}</a>
                   <p><i class="time_icon"></i><span>{$notic.uptime|date='Y.m.d',###}</span></p>
                 </li>
               </volist>
@@ -113,19 +112,18 @@
         </div>
       </div>
     </div>
-
+    <!-- 教学管理 -->
     <div class="container text_content">
       <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 content_list_box">
       <div class="content_box">
         <div class="title">
-          <h2>教学管理</h2>
-          <a href="__APP__/Home/List/news/id/{$teaching[0]['class_id']}">更多</a>
+          <h2>{$teachingClass['name']}</h2>
+          <a href="{:U($teachingClass['index_template']['url'], ['id'=>$teachingClass['class_id']])}">更多</a>
         </div>
         <ul class="content_list">
-
           <volist name="teaching" id="teach" offset="0" empty="没有数据">
             <li>
-              <a href="__APP__/Home/Content/article/id/{$teach.content_id}" title="{$teach.title}">{$teach.title}</a>
+              <a href="{:U($teachingClass['content_template']['url'], ['id'=>$teach['content_id']])}" title="{$teach.title}">{$teach.title}</a>
               <span>{$teach.uptime|time_tran=###}</span>
             </li>
           </volist>
@@ -133,17 +131,18 @@
         </ul>
       </div>
     </div>
+      <!-- 科学研究 -->
       <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 content_list_box">
         <div class="content_box">
           <div class="title">
-            <h2>科学研究</h2>
-            <a href="__APP__/Home/List/news/id/{$scientific[0]['class_id']}">更多</a>
+            <h2>{$scienceClass['name']}</h2>
+            <a href="{:U($scienceClass['index_template']['url'], ['id'=>$scienceClass['class_id']])}">更多</a>
           </div>
           <ul class="content_list">
 
             <volist name="scientific" id="scient" offset="0" empty="没有数据">
               <li>
-                <a href="__APP__/Home/Content/article/id/{$scient.content_id}" title="{$scient.title}">{$scient.title}</a>
+                <a href="{:U($scienceClass['content_template']['url'], ['id'=>$scient['content_id']])}" title="{$scient.title}">{$scient.title}</a>
                 <span>{$scient.uptime|time_tran=###}</span>
               </li>
             </volist>
@@ -151,6 +150,7 @@
           </ul>
         </div>
       </div>
+      <!-- 党团工作 -->
       <div class="col-md-4 col-lg-4 hidden-sm col-xs-12 content_list_box">
         <div class="content_box">
           <div class="title">

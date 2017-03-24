@@ -6,8 +6,18 @@ class ClassModel extends Model{
 
     protected $tableName = 'class';
     protected static $parents = [];
+    private $classes = null;
+    public function allClasses()
+    {
+        if(is_null($this->classes))
+        {
+            $this->classes = $this->order('sort_index asc, class_id asc')->select();
+            $this->classes = array_column($this->classes, null, 'class_id');
+        }
+        return $this->classes;
+    }
 
-	//返回指定ID对应的所有子栏目
+    //返回指定ID对应的所有子栏目id
 	public function getChildClass($id) {
 
 		$classIdArr = array();
@@ -30,7 +40,7 @@ class ClassModel extends Model{
         $condition['is_nav'] = 1;
         //$condition['father_id'] = 0;
         $nav = $this->where($condition)
-            ->order('sort_index asc, class_id desc')
+            ->order('sort_index asc, class_id asc')
             ->alias('c')
             ->join("__TEMPLATE__ t ON c.index_template = t.template_id")
             ->field('c.class_id,c.father_id,c.name as class_name,t.type,c.channel_id,t.url,c.content_template,c.index_template,t.template_id,t.name as template_name')
@@ -66,7 +76,6 @@ class ClassModel extends Model{
 
         }
         unset($val);
-
         return $nav;
      }
 
@@ -77,20 +86,22 @@ class ClassModel extends Model{
 	public function getParents(){
         if(count(self::$parents)<=0){
             //todo ['is_nav'=>1]
-            self::$parents = $this->where([['father_id'=>0],['is_show'=>1]])->order('sort_index asc, class_id desc')->select();
+            self::$parents = $this->where([['father_id'=>0],['is_show'=>1]])->order('sort_index asc, class_id asc')->select();
         }
         return self::$parents;
     }
 
-	public function getChildClassArr($classId) {
-		$condition['father_id'] = $classId;
-		$condition['is_show'] = 1;
-		$classArr = $this->where($condition)->order('sort_index asc, class_id desc')->select();
-		foreach ($classArr as &$v){
-            $this->templateId2Info($v);
+	public function getChildClassArr($parentClassId) {
+        $res = [];
+        foreach ($this->allClasses() as $k=>$v) {
+            if($v['father_id'] == $parentClassId && $v['is_show']==1)
+            {
+                $this->templateId2Info($v);
+                $res[$v['class_id']] = $v;
+            }
         }
-        unset($v);
-        return array_column($classArr, null, 'class_id');
+
+        return $res;
 	}
 	public function templateId2Info(&$class)
     {

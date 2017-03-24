@@ -23,33 +23,44 @@ class IndexController extends BaseController {
 
     public function index(){
 		$Content = D ('Content');
+        $classify = D('Class');
 
 		//通知公告
-        $classId = $this->getClassIdByName('通知公告');
-		$noticeList = $Content->getContent($classId,30);
+        $noticeClass = $this->getClassByName('通知公告');
+        $classify->templateId2Info($noticeClass);
+		$noticeList = $Content->getContent($noticeClass, $this->prePage);
+        $this->assign('noticeClass',$noticeClass);
 		$this->assign('noticeList',$noticeList);
 
+
 		//教学管理
-        $classId = $this->getClassIdByName('教学管理');
-        $teaching = $Content->getContent($classId, $this->prePage);
+        $teachingClass = $this->getClassByName('教学管理');
+        $classify->templateId2Info($teachingClass);
+        $teaching = $Content->getContent($teachingClass, $this->prePage);
+        $this->assign('teachingClass',$teachingClass);
         $this->assign('teaching', $teaching);
 
         //科学研究
-        $science = $this->getClassIdByName('科学研究');
-        $scientific = $Content->getContent($science, $this->prePage);
+        $scienceClass = $this->getClassByName('科学研究');
+        $classify->templateId2Info($scienceClass);
+        $scientific = $Content->getContent($scienceClass, $this->prePage);
+        $this->assign('scienceClass',$scienceClass);
         $this->assign('scientific',$scientific);
 
         //政法要闻
-        $news = $this->getClassIdByName('政法要闻');
-        $newsList = $Content->getContent($news,$this->prePage);
-        $this->assign('newsList',$newsList);
+        $newsClass = $this->getClassByName('政法要闻');
+        $classify->templateId2Info($newsClass);
+
+        $this->assign('newsClass', $newsClass);
+
 
         //政法要闻里面的有图新闻
-        $hasImgNews = $this->getClassIdByName('政法要闻');
-        $imgNews = $Content->getImgNews($hasImgNews, 1);
-        $article = $Content->getArticleById($imgNews['class_id']);
-        $this->assign('article', $article);
-        $this->assign('imgNews', $imgNews);
+        $imgNews = $Content->getImgNews($newsClass['class_id'], 1);
+        //dd($imgNews);
+        $this->assign('imgNews', $imgNews['0']);
+
+        $newsList = $Content->getContent($newsClass, $this->prePage, $imgNews[0]['content_id']);
+        $this->assign('newsList', $newsList);
 
         //设置页面标题
         $this->setTitle('首页');
