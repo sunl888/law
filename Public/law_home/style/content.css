@@ -1,7 +1,7 @@
 /* big Img */
 .big_img{
-  height: 350px;
-  background-image: url(../img/detail_big_img.jpg);
+  height: 280px;
+  background-image: url(../img/detail_bg.png);
   background-size: cover;
 }
 /* content */
