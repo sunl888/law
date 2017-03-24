@@ -68,7 +68,10 @@
       <!-- 政法要闻 -->
       <div class="container content_news col-md-8 col-lg-8 col-sm-6 col-xs-12">
         <div class="content_news_box">
-          <h2 class="title">{$newsClass['name']}</h2>
+          <h2 class="title">
+            {$newsClass['name']}
+            <a target="_blank" href="{:U($newsClass['index_template']['url'], ['id'=>$newsClass['class_id']])}">更多</a>
+          </h2>
           <div class="content_news_main">
             <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 content_news_left">
               <a href="{:U($newsClass['content_template']['url'], ['id'=>$imgNews['content_id']])}">
