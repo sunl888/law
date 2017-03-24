@@ -47,6 +47,13 @@ class IndexController extends BaseController {
         $this->assign('scienceClass',$scienceClass);
         $this->assign('scientific',$scientific);
 
+        //党团建设
+        $dtjsClass = $this->getClassByName('党团建设');
+        $classify->templateId2Info($dtjsClass);
+        $dtjsList = $Content->getContent($dtjsClass, $this->prePage);
+        $this->assign('dtjsClass',$dtjsClass);
+        $this->assign('dtjsList',$dtjsList);
+
         //政法要闻
         $newsClass = $this->getClassByName('政法要闻');
         $classify->templateId2Info($newsClass);
