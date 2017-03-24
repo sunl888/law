@@ -94,9 +94,12 @@ class ClassModel extends Model{
 	}
 	public function templateId2Info(&$class)
     {
-        $templates = $this->getTemplates();
-        $class['index_template'] = $templates[$class['index_template']];
-        $class['content_template'] = $templates[$class['content_template']];
+        if(!is_null($class)){
+            $templates = $this->getTemplates();
+            $class['index_template'] = $templates[$class['index_template']];
+            $class['content_template'] = $templates[$class['content_template']];
+        }
+
     }
 	/*public function scope($scope = '', $args = NULL)
     {

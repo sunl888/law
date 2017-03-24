@@ -4,23 +4,27 @@
 <div class="content">
   <div class="container">
       <div class="content_box">
-          <div class="right_header">
+          <div class="right_header" style="padding-left: 0;">
               <ul class="breadcrumb">
-                  <li><a href="#">首页</a>/</li>
-                  <li><a href="#">学院资讯</a>/</li>
-                  <li><a href="#">通知公告</a>/</li>
-                  <li class="active">正文</li>
+                  <li><a href="{:U('Home/Index/index')}">首页</a>/</li>
+                  <?php if(is_null($fatherClass)):?>
+                  <li><a href="{:U($class['index_template']['url'], ['id'=>$class['class_id']])}">{$class['name']}</a>/</li>
+                  <?php else:?>
+                  <li><a href="{:U($fatherClass['index_template']['url'], ['id'=>$fatherClass['class_id']])}">{$fatherClass['name']}</a>/</li>
+                  <li><a href="{:U($class['index_template']['url'], ['id'=>$class['class_id']])}">{$class['name']}</a>/</li>
+                  <?php endif;?>
+                  <li class="active"><span>正文</span></li>
               </ul>
           </div>
           <div class="content_main">
               <div class="title">
-                  <h2>关于申请助学金的通知</h2>
-                  <span>作者：北京大学考古文博学院</span>
-                  <span>2017.03.29</span>
-                  <span>点击量：1843次</span>
+                  <h1 style="padding: 10px 0;<?php if(!empty($content['title_color'])){echo 'color:'.$content['title_color'].';';}?>">{$content['title']}</h1>
+                  <span>作者：{$content['author']}</span>
+                  <span>{$content['addtime']}</span>
+                  <span>点击量：{$content['views']}次</span>
               </div>
               <div class="content_article">
-                  ewrwerewrwerewrwerewrwerewrwerewrwer
+                  {$content['body']}
               </div>
           </div>
       </div>
