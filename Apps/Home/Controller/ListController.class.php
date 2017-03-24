@@ -3,6 +3,7 @@ namespace Home\Controller;
 
 class ListController extends BaseController {
 
+    protected $limitPage = 18;
 	//列表页
 	public function index() {
 
@@ -34,7 +35,7 @@ class ListController extends BaseController {
 		$contentModel = M ('Content');
 		// 分页处理,获取数据
 		$count = $contentModel->where ( $condition )->count ();
-		$Page = new \Think\Page ( $count, 17 );
+		$Page = new MyPage( $count, $this->limitPage );
 		$show = $Page->show ();
 
 		$list = $contentModel->where ( $condition )->limit ( $Page->firstRow . ',' . $Page->listRows )->order('is_stick desc, sort_index asc,addtime desc')->select ();

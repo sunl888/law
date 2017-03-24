@@ -124,13 +124,13 @@ class MyPage{
             if($page > 0 && $page != $this->nowPage){
 
                 if($page <= $this->totalPages){
-                    $link_page .= '<li><a class="num" href="' . $this->url($page) . '">' . $page . '</a></li>';
+                    $link_page .= '<li><a  href="' . $this->url($page) . '">' . $page . '</a></li>';
                 }else{
                     break;
                 }
             }else{
                 if($page > 0 && $this->totalPages != 1){
-                    $link_page .= '<li class="active"><a href="#">' . $page . '</a></li>';
+                    $link_page .= '<li ><a class="active" href="">' . $page . '</a></li>';
                 }
             }
         }
@@ -140,6 +140,6 @@ class MyPage{
             array('%HEADER%', '%NOW_PAGE%', '%UP_PAGE%', '%DOWN_PAGE%', '%FIRST%', '%LINK_PAGE%', '%END%', '%TOTAL_ROW%', '%TOTAL_PAGE%'),
             array($this->config['header'], $this->nowPage, $up_page, $down_page, $the_first, $link_page, $the_end, $this->totalRows, $this->totalPages),
             $this->config['theme']);
-        return "<ul class='pagination'>{$page_str}</ul>";
+        return "<ol class='page'>{$page_str}</ol>";
     }
 }
